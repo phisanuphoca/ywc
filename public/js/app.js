@@ -78,30 +78,33 @@ function($scope,ApiCandidacy,$sce,$window,BASE_URL,Socialshare,ApiImage) {
                {
                     vm.collection[person.major].push(person);
                }
-     
-               if(!status && person.firstName == user.first_name && person.lastName == user.last_name)
-               {
-                  vm.statusMess  = "ยินดีด้วยครับ น้อง"+user.first_name+" "+user.last_name+" ผ่านเข้ารอบสัมภาษณ์";
-                  vm.status = true;
-                  switch(person.major) {
-                      case "content":
-                          vm.statusMajor = "web content";
-                          break;
-                      case "design":
-                          vm.statusMajor = "web design";
-                          break;
-                      case "marketing":
-                          vm.statusMajor = "web marketing";
-                          break;
-                      case "programming":
-                          vm.statusMajor = "web programming";
-                          break;
-                      default:
-                          vm.statusMajor = "";
-                          break;
-                  }
-                 vm.interviewRef = person.interviewRef+"_";
-               }
+              if(user!=null)
+              {
+                  if(!status && person.firstName == user.first_name && person.lastName == user.last_name)
+                 {
+                    vm.statusMess  = "ยินดีด้วยครับ น้อง"+user.first_name+" "+user.last_name+" ผ่านเข้ารอบสัมภาษณ์";
+                    vm.status = true;
+                    switch(person.major) {
+                        case "content":
+                            vm.statusMajor = "web content";
+                            break;
+                        case "design":
+                            vm.statusMajor = "web design";
+                            break;
+                        case "marketing":
+                            vm.statusMajor = "web marketing";
+                            break;
+                        case "programming":
+                            vm.statusMajor = "web programming";
+                            break;
+                        default:
+                            vm.statusMajor = "";
+                            break;
+                    }
+                   vm.interviewRef = person.interviewRef+"_";
+                 }
+              }
+               
 
            })
 
@@ -123,7 +126,6 @@ function($scope,ApiCandidacy,$sce,$window,BASE_URL,Socialshare,ApiImage) {
         },function(res){
             console.log("ไม่สามารถดึงข้อมูลได้");
         })
-
 
     }
    
@@ -226,67 +228,6 @@ function($scope,ApiUser,$window,BASE_URL) {
 
     
 }]);
-// angular.module('myApp')
-// .directive("navbarMaster",[
-//     "BASE_URL",
-//     "$location",
-//     "$window",
-// function(BASE_URL , $location, $window){
-//     return {
-//         scope:{
-
-//         },
-//         templateUrl: BASE_URL+"templates/navbar-master.html",
-//         link:function(scope,element,attr){
-//             console.log(BASE_URL,'navbarMaster');
-//             scope.BASE_URL = BASE_URL;
-//             scope.route = route;
-//             scope.isActive = false;
-//             function route(name){
-//                 switch(name) {
-//                     case 'tracking' :
-//                         return BASE_URL+"tracking";
-//                     case 'home' :
-//                         return BASE_URL+"";
-//                     case 'review' :
-//                         return BASE_URL+"review";
-//                     case 'contact' :
-//                         return BASE_URL+"contact";
-//                     default:
-//                         return BASE_URL+"";
-//                 }
-//             }
-
-//             scope.go = function ( path ) {
-//                 switch(name) {
-                   
-//                     case 'home' :
-//                         $window.location.href = BASE_URL;
-//                         break;
-                       
-//                     case 'review' :
-//                         console.log('ss');
-//                         $window.location.href = BASE_URL+"review";
-//                         break;
-//                     default:
-//                         $window.location.href = BASE_URL;
-//                         break;
-//                 }
-               
-//             };
-//             scope.toggle = function ( e ) {
-               
-//                 scope.isActive = !scope.isActive;
-        
-//             };
-
-
-
-//         }
-
-      
-//     }
-// }]);
 angular.module('myApp')
 .factory('ApiCandidacy', [
     "$q",
@@ -382,3 +323,64 @@ angular.module('myApp')
         });
     }
 }]);
+// angular.module('myApp')
+// .directive("navbarMaster",[
+//     "BASE_URL",
+//     "$location",
+//     "$window",
+// function(BASE_URL , $location, $window){
+//     return {
+//         scope:{
+
+//         },
+//         templateUrl: BASE_URL+"templates/navbar-master.html",
+//         link:function(scope,element,attr){
+//             console.log(BASE_URL,'navbarMaster');
+//             scope.BASE_URL = BASE_URL;
+//             scope.route = route;
+//             scope.isActive = false;
+//             function route(name){
+//                 switch(name) {
+//                     case 'tracking' :
+//                         return BASE_URL+"tracking";
+//                     case 'home' :
+//                         return BASE_URL+"";
+//                     case 'review' :
+//                         return BASE_URL+"review";
+//                     case 'contact' :
+//                         return BASE_URL+"contact";
+//                     default:
+//                         return BASE_URL+"";
+//                 }
+//             }
+
+//             scope.go = function ( path ) {
+//                 switch(name) {
+                   
+//                     case 'home' :
+//                         $window.location.href = BASE_URL;
+//                         break;
+                       
+//                     case 'review' :
+//                         console.log('ss');
+//                         $window.location.href = BASE_URL+"review";
+//                         break;
+//                     default:
+//                         $window.location.href = BASE_URL;
+//                         break;
+//                 }
+               
+//             };
+//             scope.toggle = function ( e ) {
+               
+//                 scope.isActive = !scope.isActive;
+        
+//             };
+
+
+
+//         }
+
+      
+//     }
+// }]);

@@ -62,30 +62,33 @@ function($scope,ApiCandidacy,$sce,$window,BASE_URL,Socialshare,ApiImage) {
                {
                     vm.collection[person.major].push(person);
                }
-     
-               if(!status && person.firstName == user.first_name && person.lastName == user.last_name)
-               {
-                  vm.statusMess  = "ยินดีด้วยครับ น้อง"+user.first_name+" "+user.last_name+" ผ่านเข้ารอบสัมภาษณ์";
-                  vm.status = true;
-                  switch(person.major) {
-                      case "content":
-                          vm.statusMajor = "web content";
-                          break;
-                      case "design":
-                          vm.statusMajor = "web design";
-                          break;
-                      case "marketing":
-                          vm.statusMajor = "web marketing";
-                          break;
-                      case "programming":
-                          vm.statusMajor = "web programming";
-                          break;
-                      default:
-                          vm.statusMajor = "";
-                          break;
-                  }
-                 vm.interviewRef = person.interviewRef+"_";
-               }
+              if(user!=null)
+              {
+                  if(!status && person.firstName == user.first_name && person.lastName == user.last_name)
+                 {
+                    vm.statusMess  = "ยินดีด้วยครับ น้อง"+user.first_name+" "+user.last_name+" ผ่านเข้ารอบสัมภาษณ์";
+                    vm.status = true;
+                    switch(person.major) {
+                        case "content":
+                            vm.statusMajor = "web content";
+                            break;
+                        case "design":
+                            vm.statusMajor = "web design";
+                            break;
+                        case "marketing":
+                            vm.statusMajor = "web marketing";
+                            break;
+                        case "programming":
+                            vm.statusMajor = "web programming";
+                            break;
+                        default:
+                            vm.statusMajor = "";
+                            break;
+                    }
+                   vm.interviewRef = person.interviewRef+"_";
+                 }
+              }
+               
 
            })
 
@@ -107,7 +110,6 @@ function($scope,ApiCandidacy,$sce,$window,BASE_URL,Socialshare,ApiImage) {
         },function(res){
             console.log("ไม่สามารถดึงข้อมูลได้");
         })
-
 
     }
    
