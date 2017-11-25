@@ -20,13 +20,10 @@
 </ul>
 ## Installation
 <ul>
-
-<li>install npm</li>
 <li>run <code>cp .env.example .env</code></li>
-
-
 <li>run <code>composer update</code></li>
 <li>run <code>php artisan key:generate</code></li>
+<li>run <code>php artisan migrate</code></li>
 <li>run <code>npm install</code></li>
 <li>run <code>npm install -g gulp</code></li>
 <li>run <code>gulp</code></li>
