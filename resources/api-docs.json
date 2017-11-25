@@ -1,0 +1,402 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This page lists all API interfaces for Spring News Radio mobile app.",
+    "version": "1.0.0",
+    "title": "Swagger Spring Radio",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "apiteam@swagger.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "springradio.swagger.io",
+  "basePath": "/v2",
+  "tags": [
+    {
+      "name": "configuration",
+      "description": "Cnofigurations for the mobile app"
+    },
+    {
+      "name": "program",
+      "description": "Information about radio programs"
+    },
+    {
+      "name": "advertisement",
+      "description": "Information about advertisements"
+    },
+    {
+      "name": "schedule",
+      "description": "Information about radio program schedules"
+    },
+    {
+      "name": "playback",
+      "description": "Information about the on-demand playbacks"
+    },
+    {
+      "name": "news",
+      "description": "Information about news headlines"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/api/configurations": {
+      "get": {
+        "tags": [
+          "configuration"
+        ],
+        "summary": "Get configurations for the mobile app",
+        "description": "The configuration settings is an array of key-value pairs. Following are existing keys:<ul><li>SCHEMA_VERSION</li><li>LAST_UPDATED (timestamp)</li><li>FORCE_APP_VESION</li><li>SPLASH_IMAGE_URL</li><li>SPLASH_TEXT</li><li>RADIO_URL_IOS</li><li>RADIO_URL_ANDROID</li><li>VDO_URL_IOS</li><li>VDO_URL_ANDROID</li><li>BASE_URL</li><li>FACEBOOK_URL</li><li>YOUTUBE_URL</li>",
+        "operationId": "getConfigurations",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Configuration"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/programs": {
+      "get": {
+        "tags": [
+          "program"
+        ],
+        "summary": "Get all active radio programs",
+        "description": "",
+        "operationId": "getPrograms",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Program"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/advertisements": {
+      "get": {
+        "tags": [
+          "advertisement"
+        ],
+        "summary": "Get all advertisements",
+        "description": "",
+        "operationId": "getAdvertisements",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Advertisement"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/schedules": {
+      "get": {
+        "tags": [
+          "schedule"
+        ],
+        "summary": "Get all radio program schedules",
+        "description": "",
+        "operationId": "getSchedules",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Schedule"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/playbacks/{id}": {
+      "get": {
+        "tags": [
+          "playback"
+        ],
+        "summary": "Get all on-demand playbacks of a specific radio program",
+        "description": "",
+        "operationId": "getPlaybacks",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of the radio program",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Playback"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/news": {
+      "get": {
+        "tags": [
+          "news"
+        ],
+        "summary": "Get all news headlines",
+        "description": "",
+        "operationId": "getNews",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/News"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    }
+  },
+  "securityDefinitions": {
+    "springradio_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "http://springradio.swagger.io/oauth/dialog",
+      "flow": "implicit",
+      "scopes": {
+        "write:pets": "modify pets in your account",
+        "read:pets": "read your pets"
+      }
+    },
+    "api_key": {
+      "type": "apiKey",
+      "name": "api_key",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "Configuration": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Name of the configuration item",
+          "example": "RADIO_URL_IOS"
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the configration item",
+          "example": "http://11.11.11.11/radio.m4u"
+        }
+      }
+    },
+    "Program": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string",
+          "description": "Name/title of the radio program"
+        },
+        "photo_url": {
+          "type": "string",
+          "description": "Path to the logo image of the program",
+          "example": "/uploads/programs/p1234.jpg"
+        }
+      }
+    },
+    "Advertisement": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "image_url": {
+          "type": "string",
+          "description": "Path to the image of the advertisement",
+          "example": "/uploads/ads/a234.jpg"
+        },
+        "url": {
+          "type": "string",
+          "description": "(nullable) URL to open the web view in the app when clicking at the advertisement",
+          "example": "http://show.myproducts.com"
+        },
+        "display_order": {
+          "type": "integer",
+          "description": "(nullable) The order to display the advertisement in the app"
+        },
+        "display_time": {
+          "type": "integer",
+          "description": "(nullable) Time to display the advertisement (in seconds) before rotating to another advertisement"
+        },
+        "expiry": {
+          "type": "string",
+          "format": "date",
+          "description": "(nullable) The last date that the advertisement will be displayed on the app"
+        }
+      },
+      "xml": {
+        "name": "Category"
+      }
+    },
+    "Schedule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "program_id": {
+          "type": "integer",
+          "description": "id of the radio program"
+        },
+        "day": {
+          "type": "integer",
+          "example": "1 = Monday, 7 = Sunday",
+          "description": "Day of the week"
+        },
+        "time_from": {
+          "type": "string",
+          "format": "time",
+          "description": "Start time of the radio program",
+          "example": "17:00:00"
+        },
+        "time_to": {
+          "type": "string",
+          "format": "time",
+          "description": "End time of the radio program",
+          "example": "17:30:00"
+        }
+      }
+    },
+    "Playback": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "program_id": {
+          "type": "integer",
+          "description": "id of the radio program"
+        },
+        "on_air_date": {
+          "type": "string",
+          "format": "date",
+          "description": "Date of the original program"
+        },
+        "url": {
+          "type": "string",
+          "description": "URL of the on-demand playback"
+        }
+      }
+    },
+    "News": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string",
+          "description": "Headline of the news"
+        },
+        "summary": {
+          "type": "string",
+          "description": "(nullable) Short summary of the news"
+        },
+        "image_url": {
+          "type": "string",
+          "description": "Path to the cover image of the news",
+          "example": "/uploads/news/n1234.jpg"
+        },
+        "url": {
+          "type": "string",
+          "description": "URL of the news detail",
+          "example": "http://see.mynews.com"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}

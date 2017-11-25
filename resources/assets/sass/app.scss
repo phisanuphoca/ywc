@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css?family=Prompt');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400');
+
+body,html{
+	margin: 0;
+	padding: 0;
+	font-family: 'Prompt', sans-serif;
+	background: linear-gradient(to right,#71067d,#101b50);
+}
+
+.content{
+	max-width: 1140px;
+	margin: auto;
+}
+.clearfix:after,.clearfix:before {
+   content: ' ';
+    display: table;
+}
+
+section{
+	margin: 20px 0;
+}
+h1,h2,h3,h4{
+	margin: 0;
+}
+#particles-js .particles-js-canvas-el{
+    /*margin-top: -645px;*/
+   max-height: 500px;
+    top: 0;
+    /*height: 1555px;*/
+    position: absolute;
+    z-index: -1;
+
+}
+canvas {
+    display: block;
+    vertical-align: bottom;
+}
+body{
+	position: relative;
+	z-index: -2;
+}
+
