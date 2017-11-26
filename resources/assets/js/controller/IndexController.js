@@ -98,11 +98,19 @@ function($scope,ApiCandidacy,$sce,$window,BASE_URL,Socialshare,ApiImage) {
            }
            else
            {
-              ApiImage.createImg()
-              .then(function(res) {
-                console.log(res);
-              });
-             
+             if(user!=null)
+             {
+              console.log(user.first_name+" "+user.last_name,vm.interviewRef,vm.statusMajor,"useruseruseruseruseruseruser");
+                ApiImage.createImg({
+                    name : user.first_name+" "+user.last_name,
+                    ref : vm.interviewRef,
+                    major : vm.statusMajor,
+                    img : user.image
+                })
+                .then(function(res) {
+                  console.log(res);
+                });
+             }
            }
            vm.loadpage = false;
 

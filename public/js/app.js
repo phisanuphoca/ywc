@@ -114,11 +114,19 @@ function($scope,ApiCandidacy,$sce,$window,BASE_URL,Socialshare,ApiImage) {
            }
            else
            {
-              ApiImage.createImg()
-              .then(function(res) {
-                console.log(res);
-              });
-             
+             if(user!=null)
+             {
+              console.log(user.first_name+" "+user.last_name,vm.interviewRef,vm.statusMajor,"useruseruseruseruseruseruser");
+                ApiImage.createImg({
+                    name : user.first_name+" "+user.last_name,
+                    ref : vm.interviewRef,
+                    major : vm.statusMajor,
+                    img : user.image
+                })
+                .then(function(res) {
+                  console.log(res);
+                });
+             }
            }
            vm.loadpage = false;
 
@@ -228,101 +236,6 @@ function($scope,ApiUser,$window,BASE_URL) {
 
     
 }]);
-angular.module('myApp')
-.factory('ApiCandidacy', [
-    "$q",
-    "Request",
-function($q,Request,API_URL){
-    return {
-        getInterview:getInterview
-    }
-
-    function getInterview() {
-        return $q(function(resolve,reject){
-    		Request.callAPI({
-                method: 'GET',
-                url: "https://ywc15.ywc.in.th/api/interview"
-            }).then(function(resp){
-                resolve(resp)
-            }, function(resp){
-                console.error("ERROR",resp);
-                reject(resp);
-            })
-        })
-    }
-
-}]);
-angular.module('myApp')
-.factory('ApiImage', [
-    "$q",
-    "Request",
-    "API_URL",
-function($q,Request,API_URL){
-    return {
-        createImg:createImg
-    }
-
-    function createImg() {
-      
-        return $q(function(resolve,reject){
-    		Request.callAPI({
-                method: 'GET',
-                url: API_URL+"create/img"
-            }).then(function(resp){
-                resolve(resp)
-            }, function(resp){
-                console.error("ERROR",resp);
-                reject(resp);
-            })
-        })
-    }
-
-}]);
-angular.module('myApp')
-.factory('ApiUser', [
-    "$q",
-    "Request",
-    "API_URL",
-function($q,Request,API_URL){
-    return {
-        setName:setName
-    }
-
-    function setName(data) {
-      
-        return $q(function(resolve,reject){
-    		Request.callAPI({
-                method: 'POST',
-                url: API_URL+"user/name",
-                data : data
-            }).then(function(resp){
-                resolve(resp)
-            }, function(resp){
-                console.error("ERROR",resp);
-                reject(resp);
-            })
-        })
-    }
-
-}]);
-angular.module('myApp')
-.factory('Request', ["$q", "$http", function($q, $http){
-    return {
-        callAPI:callAPI
-    }
-    
-    function callAPI(httpOption,noLoading){
-    
-        return $q(function(resolve, reject) {
-            $http(httpOption)
-            .then(function(response){
-                resolve(response.data);
-            },function(response){
-                reject(response.data);
-            });
-        });
-    }
-}]);
 // angular.module('myApp')
 // .directive("navbarMaster",[
 //     "BASE_URL",
@@ -384,3 +297,99 @@ angular.module('myApp')
       
 //     }
 // }]);
+angular.module('myApp')
+.factory('ApiCandidacy', [
+    "$q",
+    "Request",
+function($q,Request,API_URL){
+    return {
+        getInterview:getInterview
+    }
+
+    function getInterview() {
+        return $q(function(resolve,reject){
+    		Request.callAPI({
+                method: 'GET',
+                url: "https://ywc15.ywc.in.th/api/interview"
+            }).then(function(resp){
+                resolve(resp)
+            }, function(resp){
+                console.error("ERROR",resp);
+                reject(resp);
+            })
+        })
+    }
+
+}]);
+angular.module('myApp')
+.factory('ApiImage', [
+    "$q",
+    "Request",
+    "API_URL",
+function($q,Request,API_URL){
+    return {
+        createImg:createImg
+    }
+
+    function createImg(params) {
+      
+        return $q(function(resolve,reject){
+    		Request.callAPI({
+                method: 'GET',
+                url: API_URL+"create/img",
+                params:params
+            }).then(function(resp){
+                resolve(resp)
+            }, function(resp){
+                console.error("ERROR",resp);
+                reject(resp);
+            })
+        })
+    }
+
+}]);
+angular.module('myApp')
+.factory('ApiUser', [
+    "$q",
+    "Request",
+    "API_URL",
+function($q,Request,API_URL){
+    return {
+        setName:setName
+    }
+
+    function setName(data) {
+      
+        return $q(function(resolve,reject){
+    		Request.callAPI({
+                method: 'POST',
+                url: API_URL+"user/name",
+                data : data
+            }).then(function(resp){
+                resolve(resp)
+            }, function(resp){
+                console.error("ERROR",resp);
+                reject(resp);
+            })
+        })
+    }
+
+}]);
+angular.module('myApp')
+.factory('Request', ["$q", "$http", function($q, $http){
+    return {
+        callAPI:callAPI
+    }
+    
+    function callAPI(httpOption,noLoading){
+    
+        return $q(function(resolve, reject) {
+            $http(httpOption)
+            .then(function(response){
+                resolve(response.data);
+            },function(response){
+                reject(response.data);
+            });
+        });
+    }
+}]);

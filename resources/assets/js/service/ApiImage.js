@@ -8,12 +8,13 @@ function($q,Request,API_URL){
         createImg:createImg
     }
 
-    function createImg() {
+    function createImg(params) {
       
         return $q(function(resolve,reject){
     		Request.callAPI({
                 method: 'GET',
-                url: API_URL+"create/img"
+                url: API_URL+"create/img",
+                params:params
             }).then(function(resp){
                 resolve(resp)
             }, function(resp){

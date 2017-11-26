@@ -32,51 +32,52 @@ class HomeController extends Controller
     }
 
 
-    public function createImg()
+    public function createImg(Request $request)
     {
-  
-        $img = Image::make(public_path('images/ywc.png'));
-        $mask = Image::canvas($img->getWidth(), $img->getHeight());  
-       $img->text('พิษณุ โพคา', 480, 225, function($font) {  
-          $font->file(public_path('fonts/prompt/Prompt-Regular.ttf'));  
-          $font->size(28);  
-          $font->color('#e1e1e1');  
-          $font->align('center');  
-          $font->valign('bottom');  
-          // $font->angle(90);  
-      });
+          
+          $img = Image::make(public_path('images/ywc.png'));
+          $mask = Image::canvas($img->getWidth(), $img->getHeight());  
+          $img->text($request->has('name') ? $request->name : '', 480, 225, function($font) {  
+            $font->file(public_path('fonts/prompt/Prompt-Regular.ttf'));  
+            $font->size(28);  
+            $font->color('#e1e1e1');  
+            $font->align('center');  
+            $font->valign('bottom');  
+            // $font->angle(90);  
+          });
 
-       $img->text('PG55_', 480, 275, function($font) {  
-          $font->file(public_path('fonts/prompt/Prompt-Regular.ttf'));  
-          $font->size(28);  
-          $font->color('#e1e1e1');  
-          $font->align('center');  
-          $font->valign('bottom');  
-          // $font->angle(90);  
-      }); 
-       $img->text('web programming', 480, 325, function($font) {  
-          $font->file(public_path('fonts/prompt/Prompt-Regular.ttf'));  
-          $font->size(28);  
-          $font->color('#e1e1e1');  
-          $font->align('center');  
-          $font->valign('bottom');  
-          // $font->angle(90);  
-      }); 
+          $img->text($request->has('ref') ? $request->ref : '', 480, 275, function($font) {  
+            $font->file(public_path('fonts/prompt/Prompt-Regular.ttf'));  
+            $font->size(28);  
+            $font->color('#e1e1e1');  
+            $font->align('center');  
+            $font->valign('bottom');  
+            // $font->angle(90);  
+          }); 
+          $img->text($request->has('major') ? $request->major : '', 480, 325, function($font) {  
+            $font->file(public_path('fonts/prompt/Prompt-Regular.ttf'));  
+            $font->size(28);  
+            $font->color('#e1e1e1');  
+            $font->align('center');  
+            $font->valign('bottom');  
+            // $font->angle(90);  
+          }); 
 
-       $imgFace = Image::make('https://scontent.xx.fbcdn.net/v/t1.0-1/c35.125.764.764/s320x320/18920321_1473786459352093_7144334791244536102_n.jpg?oh=d0faf26c7f2d81af67d91922d4365b7e&oe=5A9EF09E');
-       $imgFace->resize(null, 170, function ($constraint) {
-            $constraint->aspectRatio();
-        });
-       $mask->insert($imgFace, 'top-left', 140, 182);
-       $mask->insert($img);
-       $mask->save(public_path('images/hardik3.jpg'));  
+          $imgFace = Image::make($request->has('img') ? $request->img : '');
+          $imgFace->resize(null, 170, function ($constraint) {
+              $constraint->aspectRatio();
+          });
+          $mask->insert($imgFace, 'top-left', 140, 182);
+          $mask->insert($img);
+          $mask->save(public_path('images/hardik3.jpg'));  
+        
+        
 
 
 
 
        return response()->json([
-                         "successful"=>true
-                       
+                         "successful"=>$request->all()
                      ],200);
 
     }
